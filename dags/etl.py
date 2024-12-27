@@ -43,3 +43,14 @@ with DAG(
         data = {"api_key":"{{ conn.nasa_api.extra_dejson.api_key}}"},
         response_filter = lambda response:response.json()
     )
+
+    ##Transform the APOD data
+    @task
+    def transform_apod_data(response):
+        apod_data = {
+            'title': response.get('title', ''),
+            'explanation': response.get('explanation', ''),
+            'url': response.get('url', ''),
+            'date': response.get('date', ''),
+            'media_type': response.get('media_type', '')
+        }
