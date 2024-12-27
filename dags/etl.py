@@ -33,3 +33,13 @@ with DAG(
         """
         ##execute table creation query
         postgres_hook.run(create_table_query)
+
+    ##Extract data from the NASA api
+    extract_epod = SimpleHttpOperator(
+        task_id = 'extract_apod',
+        htttp_conn_id = 'nasa_api', #connection id that has been defined in airflow for NASA api
+        endpoint = 'planetary/apod',
+        method = 'GET',
+        data = {"api_key":"{{ conn.nasa_api.extra_dejson.api_key}}"},
+        response_filter = lambda response:response.json()
+    )
