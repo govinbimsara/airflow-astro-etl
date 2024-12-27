@@ -1,0 +1,5 @@
+curl -sSL install.astronomer.io | sudo bash -s
+astro dev init
+astro dev start
+astro dev stop
+astro dev restart
