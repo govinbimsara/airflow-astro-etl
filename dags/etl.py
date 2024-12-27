@@ -21,7 +21,7 @@ with DAG(
 
         #SQL to create table
         create_table_query = """
-            CREATE TABLE IF NOT EXISTS apod_data (
+            CREATE TABLE IF NOT EXISTS apod_data_new (
                 id SERIAL PRIMARY KEY,
                 title VARCHAR(225),
                 explanation TEXT,
@@ -65,7 +65,7 @@ with DAG(
 
         #Sql insert query
         insert_query = """
-        INSERT INTO apod_data (title, explanation, url, date, media_type)
+        INSERT INTO apod_data_new (title, explanation, url, date, media_type)
         VALUES (%s, %s, %s, %s, %s)
         """
 
