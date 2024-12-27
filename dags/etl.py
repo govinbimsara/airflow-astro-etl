@@ -54,3 +54,28 @@ with DAG(
             'date': response.get('date', ''),
             'media_type': response.get('media_type', '')
         }
+
+        return apod_data
+
+    ##Load data to Postgres SQL
+    @task
+    def data_load_to_postgres(apod_data):
+        #Initiate postgress hook
+        postgres_hook = PostgresHooks(postgres_conn_id = 'my_postgres_connection')
+
+        #Sql insert query
+        insert_query = """
+        INSERT INTO apod_data (title, explanation, url, date, media_type)
+        VALUES (%s, %s, %s, %s, %s)
+        """
+
+        postgres_hook.run(
+            insert_query,
+            parameters = (
+                apod_data['title'],
+                apod_data['explanation'],
+                apod_data['url'],
+                apod_data['date'],
+                apod_data['media_type']
+            )
+        )
