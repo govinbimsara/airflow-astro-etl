@@ -26,7 +26,7 @@ with DAG(
                 title VARCHAR(225),
                 explanation TEXT,
                 url TEXT,
-                data DATE,
+                date DATE,
                 media_type VARCHAR(50)
             );
         
