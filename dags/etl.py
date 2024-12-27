@@ -79,3 +79,12 @@ with DAG(
                 apod_data['media_type']
             )
         )
+
+    ##Define task dependancies
+    #Etract
+    create_table() >> extract_epod
+    api_response = extract_epod.output
+    #Transform
+    transformed_data = transform_apod_data(api_response)
+    #Load
+    data_load_to_postgres(transformed_data)
