@@ -17,7 +17,7 @@ with DAG(
     @task
     def create_table():
         #initialize postgreshook
-        postgres_hook = PostgresHooks(postgres_conn_id = 'my_postgres_connection')
+        postgres_hook = PostgresHook(postgres_conn_id = 'my_postgres_connection')
 
         #SQL to create table
         create_table_query = """
@@ -61,7 +61,7 @@ with DAG(
     @task
     def data_load_to_postgres(apod_data):
         #Initiate postgress hook
-        postgres_hook = PostgresHooks(postgres_conn_id = 'my_postgres_connection')
+        postgres_hook = PostgresHook(postgres_conn_id = 'my_postgres_connection')
 
         #Sql insert query
         insert_query = """
